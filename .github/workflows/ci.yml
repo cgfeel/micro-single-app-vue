@@ -27,7 +27,7 @@ jobs:
       - name: Checkout systemjs (PR code into workspace)
         uses: actions/checkout@v4
         with:
-          path: zf-micro-app/apps/single-spa/react-project
+          path: zf-micro-app/apps/single-spa/vue-project
           fetch-depth: 0
           ref: ${{ github.sha }}
 
@@ -42,7 +42,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22.x
-          cache: "pnpm" # 关键：改为pnpm缓存（替代原npm）
+          cache: 'pnpm' # 关键：改为pnpm缓存（替代原npm）
           cache-dependency-path: zf-micro-app/pnpm-lock.yaml # 指定pnpm锁文件路径
 
       # 4. 安装monorepo所有依赖（pnpm ci替代npm ci，更适配monorepo）
@@ -55,14 +55,14 @@ jobs:
       # 5. 执行构建（构建指定子包，或所有子包）
       - name: Build project
         working-directory: zf-micro-app
-        run: pnpm --filter @levi/react build
+        run: pnpm --filter @levi/vue-project build
 
       # 6. 上传Storybook静态文件为Pages工件
       - name: Upload Pages artifact
         if: github.event_name == 'push'
         uses: actions/upload-pages-artifact@v3
         with:
-          path: zf-micro-app/apps/single-spa/react-project/dist
+          path: zf-micro-app/apps/single-spa/vue-project/dist
 
   deploy:
     if: github.event_name == 'push'
