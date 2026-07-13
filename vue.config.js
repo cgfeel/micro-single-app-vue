@@ -1,7 +1,9 @@
 const { defineConfig } = require('@vue/cli-service')
 const { CustomStandaloneDisabledPlugin, GenerateImportMapPlugin } = require("@event-chat/micro-dev-config/plugins")
 
+const ROOT_CONFIG_URL = process.env.VUE_APP_DEPLOY_BASE ?? '/micro-single-app-vue'
 const isProduction = process.env.NODE_ENV === 'production';
+const isStandalone = process.env.STANDALONE_SINGLE_SPA === 'true';
 
 const displayStandalonePage = (prod) => `<main>
   <h1>Single-spa: React 子应用</h1>
@@ -18,7 +20,7 @@ const displayStandalonePage = (prod) => `<main>
 
 module.exports = defineConfig({
   transpileDependencies: true,
-  publicPath: "http://localhost:4000",
+  publicPath: isProduction ? `${ROOT_CONFIG_URL}/` : '/',
   devServer: {
     port: 4000,
     client: {
@@ -38,7 +40,7 @@ module.exports = defineConfig({
   configureWebpack: {
     plugins: [
       new CustomStandaloneDisabledPlugin({
-        handle: (html) => !html.includes('Your Microfrontend is not here') ? html : html.replace(
+        handle: (html) => isStandalone || !html.includes('Your Microfrontend is not here') ? html : html.replace(
           /<main>[\s\S]*<\/main>/,
           displayStandalonePage(isProduction)
         )
