@@ -12,7 +12,7 @@ const displayStandalonePage = (prod) => `<main>
   <p>${
     prod
       ? '<a href="/micro-single-app-substrate/vue/">/micro-single-app-substrate/vue/</a>'
-      : '<a href="http://localhost:9000/react">http://localhost:9000/react</a>'
+      : '<a href="http://localhost:9000/vue">http://localhost:9000/vue</a>'
   }</p>
   <h2>Standalone 模式</h2>
   <p>如果想独立运行本子应用：<code>npm run serve:standalone</code></p>
