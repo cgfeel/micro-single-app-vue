@@ -1,7 +1,6 @@
 const { defineConfig } = require('@vue/cli-service')
 const { CustomStandaloneDisabledPlugin, GenerateImportMapPlugin } = require("@event-chat/micro-dev-config/plugins")
 
-const ROOT_CONFIG_URL = process.env.DEPLOY_BASE ?? "/micro-single-app-vue";
 const isProduction = process.env.NODE_ENV === 'production';
 
 const displayStandalonePage = (prod) => `<main>
