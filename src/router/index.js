@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import AboutView from './AboutView.vue'
 import HomView from './HomView.vue'
 
-const ROOT_CONFIG_URL = process.env.DEPLOY_BASE ?? '/micro-single-app-vue'
+const ROOT_CONFIG_URL = process.env.VUE_APP_DEPLOY_BASE ?? '/micro-single-app-vue'
 const isProduction = process.env.NODE_ENV === 'production'
 
 const routes = [
